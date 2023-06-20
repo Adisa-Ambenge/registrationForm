@@ -7,66 +7,66 @@ import android.widget.Toast
 import com.angela.billz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.btnRegister.setOnClickListener {
-            val intent = Intent(this,binding::class.java)
+
+        binding.tvLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        // Access the signup and login buttons using ViewBinding
-        binding.btnRegister.setOnClickListener {
-            // Handle signup button click
-            // Perform the necessary signup logic here
-            Toast.makeText(this, "Sign Up clicked", Toast.LENGTH_SHORT).show()
-        }
 
         binding.btnRegister.setOnClickListener {
-            // Handle login button click
-            // Perform the necessary login logic here
-            Toast.makeText(this, "Login clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        validateSignUp()
-    }
-
-    fun validateSignUp(){
-        val UserName = etUserName.text.toString()
-        val email = etEmailAddress.text.toString()
-        val password = etPassword.text.toString()
-        val confirmation= etConfirmPassword.text.toString()
+    private fun validateSignUp() {
+        val userName = binding.etUserName.text.toString()
+        val email = binding.etEmailAddress.text.toString()
+        val password = binding.etPassword.text.toString()
+        val confirmation = binding.etConfirmPassword.text.toString()
         var error = false
-        if (UserName.isBlank()){
-            tilUserName.error = "Username is required"
+
+        if (userName.isBlank()) {
+            binding.tilUserName.error = "Username is required"
             error = true
+        } else {
+            binding.tilUserName.error = null
         }
 
-        if (email.isBlank()){
-            tilEmailAddress.error = "Email is required"
+        if (email.isBlank()) {
+            binding.tilEmailAddress.error = "Email is required"
             error = true
+        } else {
+            binding.tilEmailAddress.error = null
         }
-        if (password.isBlank()){
-            tilPassword.error = "Password is required"
+
+        if (password.isBlank()) {
+            binding.tilPassword.error = "Password is required"
             error = true
+        } else {
+            binding.tilPassword.error = null
         }
-        if (confirmation.isBlank()){
-            tilConfirmPassword.error = "Password confirmation is required"
+
+        if (confirmation.isBlank()) {
+            binding.tilConfirmPassword.error = "Password confirmation is required"
             error = true
+        } else {
+            binding.tilConfirmPassword.error = null
         }
-        if (password!=confirmation){
-            tilConfirmPassword.error = "Password doesn't match"
-            error = true
-        }
-        if (!error){
-            Toast.makeText(this,"$UserName $email", Toast.LENGTH_LONG).show()
-        }
+
+
     }
 }
+
+
+
+
 
 
 
